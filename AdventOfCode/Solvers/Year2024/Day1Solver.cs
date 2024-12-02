@@ -2,9 +2,9 @@
 
 internal class Day1Solver() : BaseSolver2024(1)
 {
-    public override string Part1(string input)
+    public override string Part1(string[] input)
     {
-        var split = input.Split(' ', '\r', '\n').Where(x => !String.IsNullOrWhiteSpace(x)).ToList();
+        var split = input.SelectMany(x => x.Split(' ').Where(x => !String.IsNullOrWhiteSpace(x))).ToList();
 
         var (list1, list2) = Split(split);
         var total = 0;
@@ -19,9 +19,9 @@ internal class Day1Solver() : BaseSolver2024(1)
 
     private readonly Dictionary<int, int> _scores = [];
 
-    public override string Part2(string input)
+    public override string Part2(string[] input)
     {
-        var split = input.Split(' ', '\r', '\n').Where(x => !String.IsNullOrWhiteSpace(x)).ToList();
+        var split = input.SelectMany(x => x.Split(' ').Where(x => !String.IsNullOrWhiteSpace(x))).ToList();
 
         var (list1, list2) = Split(split);
 

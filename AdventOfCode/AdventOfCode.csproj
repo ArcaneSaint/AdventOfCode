@@ -12,5 +12,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <None Remove="Data\2024\2.txt" />
+	</ItemGroup>
 
 </Project>

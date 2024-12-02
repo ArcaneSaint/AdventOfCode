@@ -6,7 +6,7 @@ namespace AdventOfCode.Solvers;
 
 public abstract class BaseSolver(int day, int year) : ISolver
 {
-    private static (TimeSpan TotalTime, string Result) Measure(Func<string, string> action, string input)
+    private static (TimeSpan TotalTime, string Result) Measure(Func<string[], string> action, string[] input)
     {
         Stopwatch watch = Stopwatch.StartNew();
         var result = action(input);
@@ -37,7 +37,7 @@ public abstract class BaseSolver(int day, int year) : ISolver
         Display(timeSpan, s, 2);
     }
 
-    public abstract string Part1(string input);
+    public abstract string Part1(string[] input);
 
-    public abstract string Part2(string input);
+    public abstract string Part2(string[] input);
 }
