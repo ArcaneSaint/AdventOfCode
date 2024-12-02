@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AdventOfCode.Solvers.Year2024;
-
-namespace AdventOfCode.Solvers.Year2024;
+﻿namespace AdventOfCode.Solvers.Year2024;
 
 internal class Day1Solver() : BaseSolver2024(1)
 {
@@ -14,41 +6,42 @@ internal class Day1Solver() : BaseSolver2024(1)
     {
         var split = input.Split(' ', '\r', '\n').Where(x => !String.IsNullOrWhiteSpace(x)).ToList();
 
-        var lists = Split(split);
+        var (list1, list2) = Split(split);
         var total = 0;
 
-        for (var i = 0; i < lists.List1.Count; i++)
+        for (var i = 0; i < list1.Count; i++)
         {
-            total += Math.Abs(lists.List1[i] - lists.List2[i]);
+            total += Math.Abs(list1[i] - list2[i]);
         }
 
         return total.ToString();
     }
 
-    private Dictionary<int, int> scores = new();
+    private readonly Dictionary<int, int> _scores = [];
 
     public override string Part2(string input)
     {
         var split = input.Split(' ', '\r', '\n').Where(x => !String.IsNullOrWhiteSpace(x)).ToList();
 
-        var lists = Split(split);
+        var (list1, list2) = Split(split);
 
         var total = 0;
 
-        for (var i = 0; i < lists.List1.Count; i++)
+        for (var i = 0; i < list1.Count; i++)
         {
-            if (!scores.ContainsKey(i))
+            if (!_scores.TryGetValue(i, out int value))
             {
-                scores[i] = lists.List2.Where(x => x == lists.List1[i]).Count() * lists.List1[i];
+                value = list2.Count(x => x == list1[i]) * list1[i];
+                _scores[i] = value;
             }
 
-            total += scores[i];
+            total += value;
         }
 
         return total.ToString();
     }
 
-    private (List<int> List1, List<int> List2) Split(List<string> input)
+    private static (List<int> List1, List<int> List2) Split(List<string> input)
     {
         return (
             input.Where((x, i) => i % 2 == 1).Select(Int32.Parse).ToList(),

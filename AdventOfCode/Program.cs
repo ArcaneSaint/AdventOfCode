@@ -2,5 +2,5 @@
 using AdventOfCode.Solvers.Year2024;
 
 
-var solver = new Day1Solver();
+var solver = new Day2Solver();
 solver.Solve();

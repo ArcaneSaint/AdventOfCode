@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AdventOfCode.Solvers.Year2024;
-
-namespace AdventOfCode.Solvers.Year2024;
+﻿namespace AdventOfCode.Solvers.Year2024;
 
 internal class DayXSolver() : BaseSolver2024(99999)
 {
