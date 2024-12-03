@@ -1,13 +1,13 @@
 ﻿namespace AdventOfCode.Solvers.Year2024;
 
-internal class DayXSolver() : BaseSolver2024(99999)
+internal class DayXSolver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(99999)
 {
-    public override string Part1(string[] input)
+    public override long Part1(string[] input)
     {
         throw new NotImplementedException();
     }
 
-    public override string Part2(string[] input)
+    public override long Part2(string[] input)
     {
         throw new NotImplementedException();
     }

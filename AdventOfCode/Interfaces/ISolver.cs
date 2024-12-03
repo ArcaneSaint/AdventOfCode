@@ -2,7 +2,7 @@
 
 public interface ISolver
 {
-    public string Part1(string[] input);
-    public string Part2(string[] input);
+    public long Part1(string[] input);
+    public long Part2(string[] input);
 }
 

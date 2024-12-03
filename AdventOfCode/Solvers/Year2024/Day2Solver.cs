@@ -2,9 +2,9 @@
 
 namespace AdventOfCode.Solvers.Year2024;
 
-internal class Day2Solver() : BaseSolver2024(2)
+internal class Day2Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(2, part1Test, part2Test)
 {
-    public override string Part1(string[] input)
+    public override long Part1(string[] input)
     {
         var result = 0;
         
@@ -16,7 +16,7 @@ internal class Day2Solver() : BaseSolver2024(2)
             }
         }
 
-        return result.ToString();
+        return result;
     }
 
     private static bool Validate(List<int> data)
@@ -36,7 +36,7 @@ internal class Day2Solver() : BaseSolver2024(2)
         return valid && (isIncrease || isDecrease);
     }
 
-    public override string Part2(string[] input)
+    public override long Part2(string[] input)
     {
         var result = 0;
 
@@ -57,6 +57,6 @@ internal class Day2Solver() : BaseSolver2024(2)
             }
         }
 
-        return result.ToString();
+        return result;
     }
 }

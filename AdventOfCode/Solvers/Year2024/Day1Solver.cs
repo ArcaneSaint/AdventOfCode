@@ -1,12 +1,13 @@
 ﻿namespace AdventOfCode.Solvers.Year2024;
 
-internal class Day1Solver() : BaseSolver2024(1)
+internal class Day1Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(1, part1Test, part2Test)
 {
-    public override string Part1(string[] input)
+    public override long Part1(string[] input)
     {
         var split = input.SelectMany(x => x.Split(' ').Where(x => !String.IsNullOrWhiteSpace(x))).ToList();
 
         var (list1, list2) = Split(split);
+        (list1, list2) = (list1.Order().ToList(), list2.Order().ToList());
         var total = 0;
 
         for (var i = 0; i < list1.Count; i++)
@@ -14,12 +15,12 @@ internal class Day1Solver() : BaseSolver2024(1)
             total += Math.Abs(list1[i] - list2[i]);
         }
 
-        return total.ToString();
+        return total;
     }
 
     private readonly Dictionary<int, int> _scores = [];
 
-    public override string Part2(string[] input)
+    public override long Part2(string[] input)
     {
         var split = input.SelectMany(x => x.Split(' ').Where(x => !String.IsNullOrWhiteSpace(x))).ToList();
 
@@ -38,7 +39,7 @@ internal class Day1Solver() : BaseSolver2024(1)
             total += value;
         }
 
-        return total.ToString();
+        return total;
     }
 
     private static (List<int> List1, List<int> List2) Split(List<string> input)

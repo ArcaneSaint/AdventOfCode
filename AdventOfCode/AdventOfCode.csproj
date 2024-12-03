@@ -14,7 +14,17 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+	  <None Remove="Data\2024\Test\1.txt" />
+	  <None Remove="Data\2024\Test\2.txt" />
+	  <None Remove="Data\2024\Test\3.txt" />
 	  <None Remove="Data\2024\2.txt" />
+	  <None Remove="Data\2024\3.txt" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <Content Update="Data\2024\3.txt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 </Project>
