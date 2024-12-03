@@ -2,7 +2,7 @@
 
 public static class DataHelper
 {
-    private const string FileFormat = "Data/{0}/{1}.txt";
+    private const string FileFormat = "Data/{0}/Data/{1}.txt";
     private const string TestFileFormat = "Data/{0}/Test/{1}.txt";
     public static string[] GetInput(int year, int day, bool test = false)
     {

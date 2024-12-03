@@ -37,7 +37,7 @@ public abstract class BaseSolver(int day, int year, long part1Test = 0, long par
     private void Display(TimeSpan totalTime, long result, int part)
     {
         Console.Write($"  Result: ");
-        using (new ColorOutputter(ConsoleColor.DarkYellow))
+        using (new ColorOutputter(ConsoleColor.Yellow))
         {
             Console.WriteLine(result);
         }
