@@ -20,12 +20,14 @@
 	  <None Remove="Data\2015\Data\4.txt" />
 	  <None Remove="Data\2015\Data\5.txt" />
 	  <None Remove="Data\2015\Data\6.txt" />
+	  <None Remove="Data\2015\Data\7.txt" />
 	  <None Remove="Data\2015\Test\1.txt" />
 	  <None Remove="Data\2015\Test\2.txt" />
 	  <None Remove="Data\2015\Test\3.txt" />
 	  <None Remove="Data\2015\Test\4.txt" />
 	  <None Remove="Data\2015\Test\5.txt" />
 	  <None Remove="Data\2015\Test\6.txt" />
+	  <None Remove="Data\2015\Test\7.txt" />
 	  <None Remove="Data\2024\Data\4.txt" />
 	  <None Remove="Data\2024\Test\1.txt" />
 	  <None Remove="Data\2024\Test\2.txt" />
