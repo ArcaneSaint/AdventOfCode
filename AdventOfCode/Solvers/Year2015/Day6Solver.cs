@@ -12,11 +12,13 @@ internal class Day6Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
         foreach (var line in input)
         {
         }
+
+        return 0;
     }
 
     private static (int X1, int Y1, int X2, int Y2) Parse(string input)
     {
-        Regex.Match(input, @"turn on (\d)*,(\d)* through (\d)*,(\d)*")
+        //Regex.Match(input, @"turn on (\d)*,(\d)* through (\d)*,(\d)*");
 
         //turn on 0,0 through 999,999
         input = input.Substring("turn on".Length);
@@ -26,6 +28,7 @@ internal class Day6Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
             {
                 ++result;
             }*/
+        throw new Exception();
     }
 
     public override long Part2(string[] input)
