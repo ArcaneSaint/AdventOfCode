@@ -8,7 +8,7 @@ using AdventOfCode.Solvers.Year2024;
 //new Day4Solver(609043, 6742839).Solve(); //slow
 //new Day5Solver(1000000-1000-4, 2).Solve();
 
-new Day4Solver(18, 2).Solve();
+new Day4Solver(18, 9).Solve();
 
 
 //18

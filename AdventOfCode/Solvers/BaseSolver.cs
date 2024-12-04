@@ -31,13 +31,13 @@ public abstract class BaseSolver(int day, int year, long part1Test = 0, long par
             Console.WriteLine(testResult);
         }
         var (totalTime, result) = Measure(action, input);
-        Display(totalTime, result, 1);
+        Display(totalTime, result);
     }
 
-    private void Display(TimeSpan totalTime, long result, int part)
+    private void Display(TimeSpan totalTime, long result)
     {
         Console.Write($"  Result: ");
-        using (new ColorOutputter(ConsoleColor.Yellow))
+        using (new ColorOutputter(ConsoleColor.Blue))
         {
             Console.WriteLine(result);
         }

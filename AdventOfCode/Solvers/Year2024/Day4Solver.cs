@@ -20,7 +20,7 @@ internal class Day4Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
             for (int j = 0; j < data.GetLength(1); j++)
             {
 
-                if (Check(data, i, j, (-1, -1), 'X','M','A','S'))
+                if (Check(data, i, j, (-1, -1), 'X', 'M', 'A', 'S'))
                 {
                     results++;
                 }
@@ -122,8 +122,46 @@ internal class Day4Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
         return false;
     }
 
+    private bool CheckCross(char[,] data, int i, int j)
+    {
+        if (data[i, j] == 'A')
+        {
+            var upperLeft = data[i - 1, j - 1];
+            var upperRight = data[i - 1, j + 1];
+            var lowerLeft = data[i + 1, j - 1];
+            var lowerRight = data[i + 1, j + 1];
+
+            return ((upperLeft == 'M' && lowerRight == 'S') || (upperLeft == 'S' && lowerRight == 'M'))
+                   && ((lowerLeft == 'M' && upperRight == 'S') || (lowerLeft == 'S' && upperRight == 'M'));
+        }
+
+        return false;
+    }
+
     public override long Part2(string[] input)
     {
-        throw new NotImplementedException();
+        var data = new char[input.Length, input[0].Length];
+
+        for (int i = 0; i < input.Length; i++)
+        {
+            for (int j = 0; j < input[i].Length; j++)
+            {
+                data[i, j] = input[i][j];
+            }
+        }
+
+        var results = 0;
+        for (int i = 1; i < data.GetLength(0)-1; i++)
+        {
+            for (int j = 1; j < data.GetLength(1)-1; j++)
+            {
+                if (CheckCross(data, i, j))
+                {
+                    results++;
+                }
+            }
+        }
+
+        return results;
     }
 }
