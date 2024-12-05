@@ -6,5 +6,6 @@ internal static class StringExtensions
     {
         return int.Parse(str);
     }
+    internal static ushort ToUInt16(this string str) { return ushort.Parse(str); }
 }
 

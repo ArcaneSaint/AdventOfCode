@@ -10,21 +10,31 @@ internal class Day7Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
     {
         Dictionary<string, ushort> gates = new()
         {
-            {"1",65535 }
+            {"1", 1 }
         };
+
         var queue = new Queue<string>(input);
 
+
+        gates = SolveSignals(queue, gates);
+
+        return gates["a"];
+    }
+
+    private Dictionary<string, ushort> SolveSignals(Queue<string> queue, Dictionary<string, ushort> gates)
+    {
         while (queue.Any())
         {
             var line = queue.Dequeue();
 
             if (Regex.Match(line, @"^(\d+) -> (.*)") is { Success: true } staticValueMatch)
             {
-                var value = staticValueMatch.Groups[1].Value.ToInt();
+                var value = staticValueMatch.Groups[1].Value.ToUInt16();
                 var destination = staticValueMatch.Groups[2].Value;
 
                 gates[destination] = (ushort)value;
-            }else if (Regex.Match(line, @"^(\w+) -> (.*)") is { Success: true } passThroughValueMatch)
+            }
+            else if (Regex.Match(line, @"^(\w+) -> (.*)") is { Success: true } passThroughValueMatch)
             {
                 var source = passThroughValueMatch.Groups[1].Value;
                 var destination = passThroughValueMatch.Groups[2].Value;
@@ -89,12 +99,12 @@ internal class Day7Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
 
                         case "LSHIFT":
                             {
-                                gates[destination] = (ushort)(sourceValue << parameter.ToInt());
+                                gates[destination] = (ushort)(sourceValue << parameter.ToUInt16());
                                 break;
                             }
                         case "RSHIFT":
                             {
-                                gates[destination] = (ushort)(sourceValue >> parameter.ToInt());
+                                gates[destination] = (ushort)(sourceValue >> parameter.ToUInt16());
                                 break;
                             }
                     }
@@ -112,17 +122,36 @@ internal class Day7Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
 
         }
 
-
-
-        return gates["a"];
+        return gates;
     }
-
-
-
 
     public override long Part2(string[] input)
     {
-        return -1;
+        var aValue = Part1(input);
+
+
+        Dictionary<string, ushort> gates = new()
+        {
+            {"1", 1 },
+        };
+
+        var queue = new Queue<string>();
+        foreach (var line in input)
+        {
+            if (Regex.IsMatch(line, @"^(\d+) -> b$"))
+            {
+                queue.Enqueue($"{aValue} -> b");
+            }
+            else
+            {
+                queue.Enqueue(line);
+            }
+        }
+
+        gates = SolveSignals(queue, gates);
+
+
+        return gates["a"];
     }
 
     private enum Operator
