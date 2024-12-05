@@ -63,100 +63,56 @@ internal class Day5Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
             }
         }
 
-        //var correctedUpdates = new List<List<string>>();
-        //foreach (var update in inCorrectUpdates)
-        //{
-        //    var permutations = CreatePermutations(update);
-
-        //    correctedUpdates.Add(permutations.FirstOrDefault(x => IsValid(x, rules)).ToList());
-        //}
-
-        var rng = new Random();
         var correctedUpdates = new List<List<string>>();
-        for (var i = 0; i < inCorrectUpdates.Count; ++i)
+
+        Parallel.ForEach(inCorrectUpdates, inCorrectUpdate =>
         {
-            var update = inCorrectUpdates[i];
-            var pastValues = new List<string>();
+            var corrected = new List<string>();
 
-            do
+            foreach (var value in inCorrectUpdate)
             {
-                pastValues = new List<string>();
-                foreach (var value in update)
-                {
-                    if (pastValues.TrueForAll(pastValue =>
-                            !rules.Any(rule => rule.Greater == pastValue && rule.Lesser == value)))
-                    {
-                        pastValues.Add(value);
-                    }
-                    else
-                    {
-                        pastValues.Insert(0, value);
-                    }
-                }
-
-                update = pastValues.ToList();
-            } while (!IsValid(pastValues, rules));
-
-
-            if (IsValid(pastValues, rules))
-            {
-                correctedUpdates.Add(pastValues);
+                NextStep(value, corrected, rules);
             }
-            else
-            {
 
-            }
-        }
-
-
+            correctedUpdates.Add(corrected);
+        });
 
         result = correctedUpdates.Select(update => update[update.Count() / 2].ToInt()).Sum();
 
         return result;
     }
 
-    private bool IsValid(string line, List<(string Lesser, string Greater)> rules)
+    private void NextStep(string value, List<string> corrected, List<(string Lesser, string Greater)> rules)
     {
-        return IsValid(line.Split(","), rules);
-    }
-    private bool IsValid(IEnumerable<string> values, List<(string Lesser, string Greater)> rules)
-    {
-        var pastValues = new List<string>();
-        foreach (var page in values)
+        for (int i = 0; i <= corrected.Count; i++)
         {
-            if (pastValues.TrueForAll(pastValue =>
-                    !rules.Any(rule => rule.Greater == pastValue && rule.Lesser == page)))
+            corrected.Insert(i, value);
+            if (IsValid(corrected, rules))
             {
-                pastValues.Add(page);
+                return;
             }
             else
+            {
+                corrected.RemoveAt(i);
+            }
+        }
+    }
+
+    private bool IsValid(string line, List<(string Lesser, string Greater)> rules)
+    {
+        return IsValid(line.Split(",").ToList(), rules);
+    }
+    private bool IsValid(List<string> values, List<(string Lesser, string Greater)> rules)
+    {
+        for(int i = 0; i < values.Count; ++i)
+        {
+            var page = values[i];
+            if(!values[..i].TrueForAll(pastValue => !rules.Any(rule=>rule.Greater == pastValue && rule.Lesser == page)))
             {
                 return false;
             }
         }
 
         return true;
-    }
-
-
-    IEnumerable<IEnumerable<T>> CreatePermutations<T>(List<T> list)
-    {
-        if (list.Count() == 1)
-        {
-            yield return [list[0]];
-        }
-        else
-        {
-            for (int i = 0; i < list.Count(); ++i)
-            {
-                var next = new List<T>() { list[i] };
-                var data = CreatePermutations<T>(list.Except(next).ToList()).Select(perm => perm.Prepend(list[i]));
-                foreach (var value in data)
-                {
-                    yield return value;
-                }
-
-            }
-        }
     }
 }
