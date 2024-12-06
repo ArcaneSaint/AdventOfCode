@@ -20,7 +20,7 @@ public abstract class BaseSolver(int day, int year, long part1Test = 0, long par
         Console.WriteLine();
     }
 
-    private void TestPart(string[] testInput, string[] input, int part, long expectedTest, Func<string[], long> action)
+    private static void TestPart(string[] testInput, string[] input, int part, long expectedTest, Func<string[], long> action)
     {
         Console.WriteLine($"Part {part}");
         var testResult = action(testInput);
@@ -34,7 +34,7 @@ public abstract class BaseSolver(int day, int year, long part1Test = 0, long par
         Display(totalTime, result);
     }
 
-    private void Display(TimeSpan totalTime, long result)
+    private static void Display(TimeSpan totalTime, long result)
     {
         Console.Write($"  Result: ");
         using (new ColorOutputter(ConsoleColor.Blue))

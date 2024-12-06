@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Solvers.Year2015;
 
-internal class Day7Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2015(7, part1Test, part2Test)
+internal partial class Day7Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2015(7, part1Test, part2Test)
 {
 
 
@@ -21,20 +21,20 @@ internal class Day7Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
         return gates["a"];
     }
 
-    private Dictionary<string, ushort> SolveSignals(Queue<string> queue, Dictionary<string, ushort> gates)
+    private static Dictionary<string, ushort> SolveSignals(Queue<string> queue, Dictionary<string, ushort> gates)
     {
-        while (queue.Any())
+        while (queue.Count > 0)
         {
             var line = queue.Dequeue();
 
-            if (Regex.Match(line, @"^(\d+) -> (.*)") is { Success: true } staticValueMatch)
+            if (StaticValueRegex().Match(line) is { Success: true } staticValueMatch)
             {
                 var value = staticValueMatch.Groups[1].Value.ToUInt16();
                 var destination = staticValueMatch.Groups[2].Value;
 
                 gates[destination] = (ushort)value;
             }
-            else if (Regex.Match(line, @"^(\w+) -> (.*)") is { Success: true } passThroughValueMatch)
+            else if (PassThroughRegex().Match(line) is { Success: true } passThroughValueMatch)
             {
                 var source = passThroughValueMatch.Groups[1].Value;
                 var destination = passThroughValueMatch.Groups[2].Value;
@@ -48,7 +48,7 @@ internal class Day7Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
                     queue.Enqueue(line);
                 }
             }
-            else if (Regex.Match(line, @"^NOT (\w*) -> (\w*)") is { Success: true } inverseMatch)
+            else if (InverseRegex().Match(line) is { Success: true } inverseMatch)
             {
                 var source = inverseMatch.Groups[1].Value;
                 var destination = inverseMatch.Groups[2].Value;
@@ -61,7 +61,7 @@ internal class Day7Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
                     queue.Enqueue(line);
                 }
             }
-            else if (Regex.Match(line, @"^(\w*) (\w*) (\w*) -> (\w*)") is { Success: true } operatorMatch)
+            else if (OperatorRegex().Match(line) is { Success: true } operatorMatch)
             {
                 var source = operatorMatch.Groups[1].Value;
                 var @operator = operatorMatch.Groups[2].Value;
@@ -138,7 +138,7 @@ internal class Day7Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
         var queue = new Queue<string>();
         foreach (var line in input)
         {
-            if (Regex.IsMatch(line, @"^(\d+) -> b$"))
+            if (StaticValueToBRegex().IsMatch(line))
             {
                 queue.Enqueue($"{aValue} -> b");
             }
@@ -154,38 +154,14 @@ internal class Day7Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
         return gates["a"];
     }
 
-    private enum Operator
-    {
-        None,
-        And,
-        Or,
-        Not,
-        LShift,
-        RShift
-    }
-
-    private class Gate
-    {
-        public Operator Operator { get; set; }
-
-        Gate(string definition)
-        {
-
-        }
-        private int value;
-
-        public void SetValue(int value)
-        {
-            this.value = value;
-        }
-
-        public int GetValue()
-        {
-            switch (Operator)
-            {
-            }
-
-            return 0;
-        }
-    }
+    [GeneratedRegex(@"^(\d+) -> (.*)")]
+    private static partial Regex StaticValueRegex();
+    [GeneratedRegex(@"^NOT (\w*) -> (\w*)")]
+    private static partial Regex InverseRegex();
+    [GeneratedRegex(@"^(\w*) (\w*) (\w*) -> (\w*)")]
+    private static partial Regex OperatorRegex();
+    [GeneratedRegex(@"^(\w+) -> (.*)")]
+    private static partial Regex PassThroughRegex();
+    [GeneratedRegex(@"^(\d+) -> b$")]
+    private static partial Regex StaticValueToBRegex();
 }
