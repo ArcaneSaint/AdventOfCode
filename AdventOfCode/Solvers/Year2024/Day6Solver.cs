@@ -5,29 +5,68 @@ internal class Day6Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
     public override long Part1(string[] input)
     {
         var (spaces, direction, guardPosition) = ParseInput(input);
+        //InitDisplay(spaces);
         return GetFullPath(spaces, direction, guardPosition).Cast<TileType>().Count(x => x == TileType.Visited);
+        Console.Clear();
     }
 
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Used for debugging display")]
-    private static void Display(TileType[,] spaces)
+    private static void InitDisplay(TileType[,] spaces)
     {
         Console.Clear();
-        for (var i = 0; i < spaces.GetLength(0); ++i)
+        Console.CursorVisible = false;
+        for (var i = 0; i < spaces.GetLength(0) && i < Console.WindowHeight; ++i)
         {
-            for (var j = 0; j < spaces.GetLength(1); ++j)
+            for (var j = 0; j < spaces.GetLength(1) && j < Console.WindowWidth; ++j)
             {
-                Console.Write(spaces[i, j] switch
+                switch (spaces[i, j])
                 {
-                    TileType.Empty => '.',
-                    TileType.Obstacle => '#',
-                    _ => '*',
-                });
+                    case TileType.Empty:
+                        {
+                            using (new ColorOutputter(ConsoleColor.DarkGray))
+                            {
+                                Console.Write('.');
+                            }
+                            break;
+                        }
+                    case TileType.Obstacle:
+                        {
+                            using (new ColorOutputter(ConsoleColor.Red))
+                            {
+                                Console.Write('#');
+                            }
+                            break;
+                        }
+                    default:
+                        {
+
+                            using (new ColorOutputter(ConsoleColor.White))
+                            {
+                                Console.Write('*');
+                            }
+                            break;
+                        }
+                }
             }
             Console.WriteLine();
         }
         Console.WriteLine();
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Used for debugging display")]
+    private static void Display((int x, int y) guardPosition)
+    {
+        //Console.Clear();
+        Console.CursorVisible = false;
+        if (guardPosition.x < Console.WindowHeight && guardPosition.y < Console.WindowWidth)
+        {
+            Console.SetCursorPosition(guardPosition.y, guardPosition.x);
+            Console.Write('*');
+        }
+
+        Thread.Sleep(1);
+    }
     [Flags]
     enum TileType
     {
@@ -112,7 +151,7 @@ internal class Day6Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
                && guardPosition.x + direction.dX < spaces.GetLength(0)
                && guardPosition.y + direction.dY < spaces.GetLength(1))
         {
-            //Display(spaces);
+            //Display(guardPosition);
             var nextSpace = spaces[guardPosition.x + direction.dX, guardPosition.y + direction.dY];
             if (nextSpace != TileType.Obstacle)
             {
@@ -179,16 +218,22 @@ internal class Day6Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
         var (spaces, direction, guardPosition) = ParseInput(input);
         var searchSpace = GetFullPath((spaces.Clone() as TileType[,])!, direction, guardPosition);
         var results = 0;
-        for (var i = 0; i < input.Length; ++i)
+        var pathsChecked = 0;
+
+        Parallel.For(0, input.Length * input[0].Length, i =>
         {
-            for (var j = 0; j < input[i].Length; ++j)
+
+            if (searchSpace[i / input.Length, i % input.Length] == TileType.Visited)
             {
-                if (searchSpace[i, j] == TileType.Visited && IsLoop((spaces.Clone() as TileType[,])!, direction, guardPosition, i, j))
+                pathsChecked++;
+                if (IsLoop((spaces.Clone() as TileType[,])!, direction, guardPosition, i / input.Length, i % input.Length))
                 {
                     results++;
                 }
             }
-        }
+        });
+
+        AdditionalInfo = $"paths checked: {pathsChecked}";
 
         return results;
     }

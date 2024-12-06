@@ -6,6 +6,7 @@ namespace AdventOfCode.Solvers;
 
 public abstract class BaseSolver(int day, int year, long part1Test = 0, long part2Test = 0) : ISolver
 {
+    public virtual string? AdditionalInfo { get; protected set; }
 
     public void Solve()
     {
@@ -20,26 +21,30 @@ public abstract class BaseSolver(int day, int year, long part1Test = 0, long par
         Console.WriteLine();
     }
 
-    private static void TestPart(string[] testInput, string[] input, int part, long expectedTest, Func<string[], long> action)
+    private void TestPart(string[] testInput, string[] input, int part, long expectedTest, Func<string[], long> action)
     {
         Console.WriteLine($"Part {part}");
-        var testResult = action(testInput);
 
-        Console.Write($"  Test: ");
-        using (new ColorOutputter(testResult == expectedTest ? ConsoleColor.Green : ConsoleColor.DarkRed))
-        {
-            Console.WriteLine(testResult);
-        }
+        var (totalTimeTest, testResult) = Measure(action, testInput);
+        Display(totalTimeTest, testResult, "Test", testResult == expectedTest ? ConsoleColor.Green : ConsoleColor.DarkRed);
+
         var (totalTime, result) = Measure(action, input);
-        Display(totalTime, result);
+        Display(totalTime, result, "Release", ConsoleColor.Blue);
     }
 
-    private static void Display(TimeSpan totalTime, long result)
+    private void Display(TimeSpan totalTime, long result, string label, ConsoleColor resultColor)
     {
-        Console.Write($"  Result: ");
-        using (new ColorOutputter(ConsoleColor.Blue))
+        Console.Write($"  {label}: ");
+        using (new ColorOutputter(resultColor))
         {
             Console.WriteLine(result);
+        }
+        if (!String.IsNullOrWhiteSpace(AdditionalInfo))
+        {
+            using (new ColorOutputter(ConsoleColor.DarkGray))
+            {
+                Console.WriteLine($"   {AdditionalInfo}");
+            }
         }
         Console.WriteLine($" Total time elapsed: {totalTime}");
     }
