@@ -7,7 +7,6 @@ internal class Day6Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
         var (spaces, direction, guardPosition) = ParseInput(input);
         //InitDisplay(spaces);
         return GetFullPath(spaces, direction, guardPosition).Cast<TileType>().Count(x => x == TileType.Visited);
-        Console.Clear();
     }
 
 
@@ -67,6 +66,7 @@ internal class Day6Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
 
         Thread.Sleep(1);
     }
+    
     [Flags]
     enum TileType
     {
