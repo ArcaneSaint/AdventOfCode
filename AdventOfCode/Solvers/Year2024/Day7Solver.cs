@@ -80,16 +80,26 @@ internal class Day7Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
     public override long Part2(string[] input)
     {
         var results = 0l;
-        foreach (var line in input)
-        {
+
+        Parallel.ForEach(input, (line, state) => {
             var (target, operands) = ParseLine(line);
 
             if (TryOperatorsWithConcat(target, operands[1..], operands[0]) is { Item1: true } success)
             {
                 results += target;
             }
+        });
 
-        }
+        //foreach (var line in input)
+        //{
+
+        //    var (target, operands) = ParseLine(line);
+
+        //    if (TryOperatorsWithConcat(target, operands[1..], operands[0]) is { Item1: true } success)
+        //    {
+        //        results += target;
+        //    }
+        //}
 
 
         return results;
