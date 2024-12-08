@@ -45,27 +45,6 @@ internal class Day8Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
         var locations = new List<(int Row, int Col)>();
         var (nodes, height, width) = ParseInput(input);
 
-
-        Parallel.ForEach(nodes, node =>
-        {
-            Parallel.ForEach(nodes.Where(x => x.Frequency == node.Frequency), matchingNode =>
-            {
-                var vector = VectorHelpers.CalculateVector(node.Row, node.Col, matchingNode.Row, matchingNode.Col);
-                if (vector is not { X: 0, Y: 0 })
-                {
-                    (int Row, int Col) antiNode = (node.Row, node.Col);
-
-                    while (antiNode.Row >= 0 && antiNode.Row < height && antiNode.Col >= 0 && antiNode.Col < width)
-                    {
-                        locations.Add(antiNode);
-                        antiNode = (Row: antiNode.Row + vector.X, Col: antiNode.Col + vector.Y);
-                    }
-                }
-            });
-        });
-
-
-
         foreach (var node in nodes)
         {
             foreach (var matchingNode in nodes.Where(x => x.Frequency == node.Frequency))
