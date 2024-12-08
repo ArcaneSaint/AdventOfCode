@@ -46,7 +46,7 @@ public abstract class BaseSolver(int day, int year, long part1Test = 0, long par
                 Console.WriteLine($"   {AdditionalInfo}");
             }
         }
-        Console.WriteLine($" Total time elapsed: {totalTime}");
+        Console.WriteLine($"   Total time elapsed: {totalTime}");
     }
     private static (TimeSpan TotalTime, long Result) Measure(Func<string[], long> action, string[] input)
     {
