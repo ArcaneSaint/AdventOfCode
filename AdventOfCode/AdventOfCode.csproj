@@ -35,6 +35,7 @@
 	  <None Remove="Data\2024\Data\6.txt" />
 	  <None Remove="Data\2024\Data\7.txt" />
 	  <None Remove="Data\2024\Data\8.txt" />
+	  <None Remove="Data\2024\Data\9.txt" />
 	  <None Remove="Data\2024\Test\1.txt" />
 	  <None Remove="Data\2024\Test\2.txt" />
 	  <None Remove="Data\2024\Test\3.txt" />
@@ -45,6 +46,7 @@
 	  <None Remove="Data\2024\Test\6.txt" />
 	  <None Remove="Data\2024\Test\7.txt" />
 	  <None Remove="Data\2024\Test\8.txt" />
+	  <None Remove="Data\2024\Test\9.txt" />
 	</ItemGroup>
 	
 	<ItemGroup>
