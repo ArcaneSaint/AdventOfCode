@@ -17,16 +17,20 @@ internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
                 var item = data[i, j];
                 if (item == 0)
                 {
-                    results += ValidPaths(i, j, data);
+                   // var paths = FindPaths((i, j), data);
+
+                  //  results += paths.Distinct().Count();
+                    results += CountTrailheads(i, j, data);
                 }
             }
         }
         return results;
     }
 
-    private int ValidPaths(int i, int j, int[,] data)
+
+    private int CountTrailheads(int i, int j, int[,] data)
     {
-        DisplayGrid(data);
+        //DisplayGrid(data);
         var currentHeight = data[i, j];
         var results = 0;
 
@@ -65,12 +69,68 @@ internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
 
 
             currentHeight = targetHeight;
-            frontier = next.Distinct().ToList();
+            frontier = next.Distinct().ToList();//.Distinct().ToList();
             //Display(frontier);
-            DisplayMarks(frontier);
+            //DisplayMarks(frontier);
             if (targetHeight == 9)
             {
-                results += frontier.Count;
+                results += frontier.Distinct().Count();
+            }
+
+
+
+        }
+
+        return results;
+    }
+
+    private int CountPaths(int row, int col, int[,] data)
+    {
+        //DisplayGrid(data);
+        var currentHeight = data[row, col];
+        var results = 0;
+
+        var frontier = new List<(int i, int j)> { (row, col) };
+
+        while (frontier.Any() && currentHeight < 9)
+        {
+            var targetHeight = currentHeight + 1;
+
+            var next = new List<(int i, int j)>();
+
+            foreach (var item in frontier)
+            {
+                var up = (i: item.i - 1, j: item.j);
+                var down = (i: item.i + 1, j: item.j);
+                var left = (i: item.i, j: item.j - 1);
+                var right = (i: item.i, j: item.j + 1);
+
+                if (IsInBounds(up, data) && data[up.i, up.j] == targetHeight)
+                {
+                    next.Add(up);
+                }
+                if (IsInBounds(down, data) && data[down.i, down.j] == targetHeight)
+                {
+                    next.Add(down);
+                }
+                if (IsInBounds(left, data) && data[left.i, left.j] == targetHeight)
+                {
+                    next.Add(left);
+                }
+                if (IsInBounds(right, data) && data[right.i, right.j] == targetHeight)
+                {
+                    next.Add(right);
+                }
+            }
+
+
+            currentHeight = targetHeight;
+            frontier = next.ToList();//.Distinct().ToList();
+            //Display(frontier);
+            //DisplayMarks(frontier);
+            if (targetHeight == 9)
+            {
+                results += frontier.Count();
             }
 
 
@@ -87,7 +147,7 @@ internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
         {
             for (var j = 0; j < data.GetLength(1); ++j)
             {
-                Console.Write(data[i,j]);
+                Console.Write(data[i, j]);
             }
 
             Console.WriteLine();
@@ -123,10 +183,27 @@ internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
     }
 
 
+
     public override long Part2(string[] input)
     {
-        return 0;
+        var data = ParseInput(input);
+        var results = 0;
+
+        for (var i = 0; i < data.GetLength(0); ++i)
+        {
+            for (var j = 0; j < data.GetLength(1); ++j)
+            {
+                var item = data[i, j];
+                if (item == 0)
+                {
+                    //  results += paths.Distinct().Count();
+                    results += CountPaths(i, j, data);
+                }
+            }
+        }
+        return results;
     }
+
 
     private static int[,] ParseInput(string[] input)
     {
