@@ -30,6 +30,7 @@
 	  <None Remove="Data\2015\Test\6.txt" />
 	  <None Remove="Data\2015\Test\7.txt" />
 	  <None Remove="Data\2015\Test\8.txt" />
+	  <None Remove="Data\2024\Data\10.txt" />
 	  <None Remove="Data\2024\Data\4.txt" />
 	  <None Remove="Data\2024\Data\5.txt" />
 	  <None Remove="Data\2024\Data\6.txt" />
@@ -37,6 +38,7 @@
 	  <None Remove="Data\2024\Data\8.txt" />
 	  <None Remove="Data\2024\Data\9.txt" />
 	  <None Remove="Data\2024\Test\1.txt" />
+	  <None Remove="Data\2024\Test\10.txt" />
 	  <None Remove="Data\2024\Test\2.txt" />
 	  <None Remove="Data\2024\Test\3.txt" />
 	  <None Remove="Data\2024\2.txt" />
@@ -57,6 +59,12 @@
 	
 	<ItemGroup>
 	  <Content Update="Data\2024\Test\8.txt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <Content Update="Data\2024\Test\10.txt">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
