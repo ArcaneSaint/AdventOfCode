@@ -10,6 +10,9 @@ internal static class StringExtensions
     {
         return long.Parse(str);
     }
+
+    internal static string? AsNullIfWhiteSpace(this string str) => string.IsNullOrWhiteSpace(str) ? null : str;
+
     internal static ushort ToUInt16(this string str) { return ushort.Parse(str); }
 }
 

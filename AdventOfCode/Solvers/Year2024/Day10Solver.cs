@@ -140,6 +140,7 @@ internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
         return results;
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Used for debugging display")]
     private void DisplayGrid(int[,] data)
     {
         Console.Clear();
@@ -155,6 +156,7 @@ internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
 
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Used for debugging display")]
     private void DisplayMarks(List<(int i, int j)> frontier)
     {
         foreach (var item in frontier)
@@ -164,6 +166,7 @@ internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
         }
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Used for debugging display")]
     private void Display(List<(int i, int j)> next)
     {
         foreach (var item in next)

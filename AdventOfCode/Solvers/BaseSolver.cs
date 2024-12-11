@@ -29,7 +29,7 @@ public abstract class BaseSolver(int day, int year, long part1Test = 0, long par
         Display(totalTimeTest, testResult, "Test", testResult == expectedTest ? ConsoleColor.Green : ConsoleColor.DarkRed);
 
         var (totalTime, result) = Measure(action, input);
-        Display(totalTime, result, "Release", ConsoleColor.Blue);
+        Display(totalTime, result, "Result", ConsoleColor.Blue);
     }
 
     private void Display(TimeSpan totalTime, long result, string label, ConsoleColor resultColor)
