@@ -1,6 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-namespace AdventOfCode.Solvers.Year2024;
+﻿namespace AdventOfCode.Solvers.Year2024;
 
 internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(10, part1Test, part2Test)
 {
@@ -49,19 +47,19 @@ internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
                 var left = (i: item.i, j: item.j - 1);
                 var right = (i: item.i, j: item.j + 1);
 
-                if (IsInBounds(up, data) && data[up.i, up.j] == targetHeight)
+                if (data.IsInBounds(up) && data[up.i, up.j] == targetHeight)
                 {
                     next.Add(up);
                 }
-                if (IsInBounds(down, data) && data[down.i, down.j] == targetHeight)
+                if (data.IsInBounds(down) && data[down.i, down.j] == targetHeight)
                 {
                     next.Add(down);
                 }
-                if (IsInBounds(left, data) && data[left.i, left.j] == targetHeight)
+                if (data.IsInBounds(left) && data[left.i, left.j] == targetHeight)
                 {
                     next.Add(left);
                 }
-                if (IsInBounds(right, data) && data[right.i, right.j] == targetHeight)
+                if (data.IsInBounds(right) && data[right.i, right.j] == targetHeight)
                 {
                     next.Add(right);
                 }
@@ -105,19 +103,19 @@ internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
                 var left = (i: item.i, j: item.j - 1);
                 var right = (i: item.i, j: item.j + 1);
 
-                if (IsInBounds(up, data) && data[up.i, up.j] == targetHeight)
+                if (data.IsInBounds(up) && data[up.i, up.j] == targetHeight)
                 {
                     next.Add(up);
                 }
-                if (IsInBounds(down, data) && data[down.i, down.j] == targetHeight)
+                if (data.IsInBounds(down) && data[down.i, down.j] == targetHeight)
                 {
                     next.Add(down);
                 }
-                if (IsInBounds(left, data) && data[left.i, left.j] == targetHeight)
+                if (data.IsInBounds(left) && data[left.i, left.j] == targetHeight)
                 {
                     next.Add(left);
                 }
-                if (IsInBounds(right, data) && data[right.i, right.j] == targetHeight)
+                if (data.IsInBounds(right) && data[right.i, right.j] == targetHeight)
                 {
                     next.Add(right);
                 }
@@ -177,13 +175,6 @@ internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
         Console.WriteLine("----");
     }
 
-    private static bool IsInBounds((int i, int j) up, int[,] data)
-    {
-        return up.i >= 0
-               && up.j >= 0
-               && up.i < data.GetLength(0)
-               && up.j < data.GetLength(1);
-    }
 
 
 
