@@ -15,8 +15,11 @@ public abstract class BaseSolver<T>(int day, int year, T part1Test, T part2Test)
         var testInput = DataHelper.GetInput(year, day, true);
         var input = DataHelper.GetInput(year, day);
 
+        var testInput2 = DataHelper.GetInput(year, day, true, 2);
+        var input2 = DataHelper.GetInput(year, day, false, 2);
+
         TestPart(testInput, input, 1, part1Test, Part1);
-        TestPart(testInput, input, 2, part2Test, Part2);
+        TestPart(testInput2 ?? testInput, input2 ?? input, 2, part2Test, Part2);
 
         Console.WriteLine();
     }
