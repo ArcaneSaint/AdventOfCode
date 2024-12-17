@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Solvers.Year2024;
 
-internal class Day5Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(5, part1Test, part2Test)
+internal class Day5Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024<long>(5, part1Test, part2Test)
 {
     public override long Part1(string[] input)
     {

@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Solvers.Year2024;
 
-internal class Day15Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(15, part1Test, part2Test)
+internal class Day15Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024<long>(15, part1Test, part2Test)
 {
     enum Command
     {

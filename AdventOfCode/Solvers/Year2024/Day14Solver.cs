@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Solvers.Year2024;
 
-internal class Day14Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(14, part1Test, part2Test)
+internal class Day14Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024<long>(14, part1Test, part2Test)
 {
     struct Robot
     {

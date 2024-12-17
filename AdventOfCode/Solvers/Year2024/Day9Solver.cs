@@ -1,9 +1,6 @@
-﻿using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿namespace AdventOfCode.Solvers.Year2024;
 
-namespace AdventOfCode.Solvers.Year2024;
-
-internal class Day9Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(9, part1Test, part2Test)
+internal class Day9Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024<long>(9, part1Test, part2Test)
 {
     struct DiskPosition
     {

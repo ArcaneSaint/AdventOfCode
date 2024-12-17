@@ -4,7 +4,7 @@ using AdventOfCode.Interfaces;
 
 namespace AdventOfCode.Solvers;
 
-public abstract class BaseSolver(int day, int year, long part1Test = 0, long part2Test = 0) : ISolver
+public abstract class BaseSolver<T>(int day, int year, T part1Test, T part2Test) : ISolver<T>
 {
     public virtual string? AdditionalInfo { get; protected set; }
 
@@ -21,18 +21,18 @@ public abstract class BaseSolver(int day, int year, long part1Test = 0, long par
         Console.WriteLine();
     }
 
-    private void TestPart(string[] testInput, string[] input, int part, long expectedTest, Func<string[], long> action)
+    private void TestPart(string[] testInput, string[] input, int part, T expectedTest, Func<string[], T> action)
     {
         Console.WriteLine($"Part {part}");
 
         var (totalTimeTest, testResult) = Measure(action, testInput);
-        Display(totalTimeTest, testResult, "Test", testResult == expectedTest ? ConsoleColor.Green : ConsoleColor.DarkRed);
+        Display(totalTimeTest, testResult, "Test", testResult.Equals(expectedTest) ? ConsoleColor.Green : ConsoleColor.DarkRed);
 
         var (totalTime, result) = Measure(action, input);
         Display(totalTime, result, "Result", ConsoleColor.Blue);
     }
 
-    private void Display(TimeSpan totalTime, long result, string label, ConsoleColor resultColor)
+    private void Display(TimeSpan totalTime, T result, string label, ConsoleColor resultColor)
     {
         Console.Write($"  {label}: ");
         using (new ColorOutputter(resultColor))
@@ -48,14 +48,15 @@ public abstract class BaseSolver(int day, int year, long part1Test = 0, long par
         }
         Console.WriteLine($"   Total time elapsed: {totalTime}");
     }
-    private static (TimeSpan TotalTime, long Result) Measure(Func<string[], long> action, string[] input)
+    private static (TimeSpan TotalTime, T Result) Measure(Func<string[], T> action, string[] input)
     {
         Stopwatch watch = Stopwatch.StartNew();
         var result = action(input);
         watch.Stop();
         return (watch.Elapsed, result);
     }
-    public abstract long Part1(string[] input);
 
-    public abstract long Part2(string[] input);
+    public abstract T Part1(string[] input);
+
+    public abstract T Part2(string[] input);
 }

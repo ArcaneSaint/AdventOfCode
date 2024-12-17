@@ -4,7 +4,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace AdventOfCode.Solvers.Year2024;
 
-internal class Day3Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(3, part1Test, part2Test)
+internal class Day3Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024<long>(3, part1Test, part2Test)
 {
     public override long Part1(string[] input)
     {

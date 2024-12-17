@@ -4,7 +4,7 @@ using AdventOfCode.Helpers;
 
 namespace AdventOfCode.Solvers.Year2024;
 
-internal class Day16Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(16, part1Test, part2Test)
+internal class Day16Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024<long>(16, part1Test, part2Test)
 {
     class Tile
     {
@@ -288,19 +288,21 @@ internal class Day16Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
         var (tiles, startingPosition, endingPosition) = ParseInput(input);
         var maxCost = Solve(tiles, startingPosition, endingPosition);
 
-        //DrawGrid(tiles);
+       // DrawGrid(tiles);
         var numberOfTiles = 0;
 
         var possiblePaths = GetPossiblePaths(maxCost, 0, startingPosition, endingPosition, Direction.Right, tiles, new List<(int row, int col)>());
 
 
-        // var toDebug = possiblePaths.Distinct().OrderBy(x=>x.Cost).ToList();
-        //foreach (var item in toDebug)
+        //var toDebug = possiblePaths.Distinct().ToList();
+        //using (new ColorOutputter(ConsoleColor.Green))
         //{
-        // Console.SetCursorPosition(item.Position.col, item.Position.row);
-        //   Console.Write('O');
-        // }
-
+        //    foreach (var item in toDebug)
+        //    {
+        //        Console.SetCursorPosition(item.col, item.row);
+        //        Console.Write('O');
+        //    }
+        //}
         numberOfTiles = possiblePaths.Distinct().Count();
         //var bestPathCost = tiles.GetItem(endingPosition).Cost;
 

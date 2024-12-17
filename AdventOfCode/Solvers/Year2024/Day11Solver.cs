@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Solvers.Year2024;
 
-internal class Day11Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(11, part1Test, part2Test)
+internal class Day11Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024<long>(11, part1Test, part2Test)
 {
     const int NumberOfBlinksPartOne = 25;
     const int NumberOfBlinksPartTwo = 75;

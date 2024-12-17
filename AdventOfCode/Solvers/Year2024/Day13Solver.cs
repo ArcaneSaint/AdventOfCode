@@ -5,7 +5,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AdventOfCode.Solvers.Year2024;
 
-internal class Day13Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(13, part1Test, part2Test)
+internal class Day13Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024<long>(13, part1Test, part2Test)
 {
     struct Machine
     {

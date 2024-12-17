@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Solvers.Year2024;
 
-internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024(10, part1Test, part2Test)
+internal class Day10Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2024<long>(10, part1Test, part2Test)
 {
 
     public override long Part1(string[] input)
