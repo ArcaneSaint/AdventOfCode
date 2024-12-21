@@ -12,8 +12,8 @@ public abstract class BaseSolver<T>(int day, int year, T part1Test, T part2Test)
     {
         Console.WriteLine($"AoC {year} day {day}");
 
-        var testInput = DataHelper.GetInput(year, day, true);
-        var input = DataHelper.GetInput(year, day);
+        var testInput = DataHelper.GetInput(year, day, true)!;
+        var input = DataHelper.GetInput(year, day)!;
 
         var testInput2 = DataHelper.GetInput(year, day, true, 2);
         var input2 = DataHelper.GetInput(year, day, false, 2);
@@ -29,7 +29,7 @@ public abstract class BaseSolver<T>(int day, int year, T part1Test, T part2Test)
         Console.WriteLine($"Part {part}");
 
         var (totalTimeTest, testResult) = Measure(action, testInput);
-        Display(totalTimeTest, testResult, "Test", testResult.Equals(expectedTest) ? ConsoleColor.Green : ConsoleColor.DarkRed);
+        Display(totalTimeTest, testResult, "Test", testResult!.Equals(expectedTest) ? ConsoleColor.Green : ConsoleColor.DarkRed);
 
         var (totalTime, result) = Measure(action, input);
         Display(totalTime, result, "Result", ConsoleColor.Blue);

@@ -113,54 +113,27 @@ internal class Day14Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
             return 0;
         }
 
-        var middle = (X: width / 2, Y: height / 2);
-
         var robots = ParseInput(input);
         long seconds = 1;
-        ConsoleKey lastInput = ConsoleKey.RightArrow;
 
-        //var direction = 1;
-       // do
-        //{
-            //if (lastInput == ConsoleKey.LeftArrow)
-            //{
-            //    direction = -1;
-            //}
-            //else
-            //{
-            //    direction = 1;
-            //}
+        var hasATree = false;
+        while (!hasATree)
+        {
+            seconds++;
 
-            var hasATree = false;
-            while (!hasATree)
+            var results = new int[height, width];
+
+            foreach (var robot in robots)
             {
-                seconds ++;
-
-                var results = new int[height, width];
-
-                foreach (var robot in robots)
-                {
-                    var endPos = (X: (robot.Position.X + robot.Velocity.dX * seconds), Y: (robot.Position.Y + robot.Velocity.dY * seconds));
-                    var wrappedX = Wrap(endPos.X, width);
-                    var wrappedY = Wrap(endPos.Y, height);
-                    results[wrappedY, wrappedX]++;
-                }
-
-                hasATree = HasATree(results);
-
-                //if (hasALine)
-                //{
-                //    Display(results);
-                //}
+                var endPos = (X: (robot.Position.X + robot.Velocity.dX * seconds), Y: (robot.Position.Y + robot.Velocity.dY * seconds));
+                var wrappedX = Wrap(endPos.X, width);
+                var wrappedY = Wrap(endPos.Y, height);
+                results[wrappedY, wrappedX]++;
             }
 
-            //Console.WriteLine();
-            //Console.WriteLine($"{seconds} seconds have passed");
-            //Console.WriteLine("Press any key to continue, escape to stop, left arrow to go back a step");
+            hasATree = HasATree(results);
+        }
 
-           // lastInput = Console.ReadKey().Key;
-
-        //} while (lastInput != ConsoleKey.Escape);
 
 
         return seconds;
@@ -174,17 +147,18 @@ internal class Day14Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
         var fullColumns = 0;
         var partialColumns = 0;
 
-        for (int row = 0; row < data.GetLength(0); ++row) 
+        for (int row = 0; row < data.GetLength(0); ++row)
         {
             int sum = 0;
-            for (int col = 0; col < data.GetLength(1); ++col) 
+            for (int col = 0; col < data.GetLength(1); ++col)
             {
                 sum += data[row, col];
             }
             if (sum >= 31)
             {
                 ++fullLines;
-            }else if (sum >= 9)
+            }
+            else if (sum >= 9)
             {
                 ++partialLines;
             }
@@ -208,7 +182,7 @@ internal class Day14Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
             }
         }
 
-        if (fullLines == 2 && partialLines > 10 && fullColumns==2 && partialColumns==3)
+        if (fullLines == 2 && partialLines > 10 && fullColumns == 2 && partialColumns == 3)
         {
             return true;
         }

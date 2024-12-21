@@ -121,8 +121,6 @@ internal class Day16Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
         }
     }
 
-    private int turns = 0;
-
     private void DrawPosition(int row, int col, Direction direction) =>
         DrawPosition(row, col, direction switch
         {

@@ -143,23 +143,22 @@ internal class Day20Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
         var pathTiles = tiles.Where(x => !x.IsWall).OrderByDescending(x=>x.DistanceToEnd).ToList();
         var results = 0;
 
-        for(var pI = 0;  pI < pathTiles.Count; ++pI)
+        Parallel.For(0, pathTiles.Count, pI =>
         {
             var tile = pathTiles[pI];
             var possibleTeleports = pathTiles[pI..].Where(x => Manhattan(x.Position, tile.Position) <= distanceToSkip).ToList();
-
             for (var i = 0; i < possibleTeleports.Count; i++)
             {
                 if ((tile.DistanceToEnd - possibleTeleports[i].DistanceToEnd - Manhattan(tile.Position, possibleTeleports[i].Position)) >= targetSeconds)
                 {
                     var distanceDebug = tile.DistanceToEnd - possibleTeleports[i].DistanceToEnd;
                     var distanceJumped = Manhattan(tile.Position, possibleTeleports[i].Position);
-                    results++;
+
+                    Interlocked.Increment(ref results);
                 }
-
             }
+        });
 
-        }
 
 
         return results;

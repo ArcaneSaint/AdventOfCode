@@ -58,9 +58,6 @@ internal class Day11Solver(long part1Test = 0, long part2Test = 0) : BaseSolver2
         Console.WriteLine(String.Join(" ", input));
     }
 
-    private Dictionary<string, string[]> previousResults;
-
-
     public override long Part2(string[] input)
     {
         var data = ParseInput(input[0]);
