@@ -75,6 +75,7 @@
 	  <None Remove="Data\2024\Test\20.txt" />
 	  <None Remove="Data\2024\Test\21.txt" />
 	  <None Remove="Data\2024\Test\22.txt" />
+	  <None Remove="Data\2024\Test\22_2.txt" />
 	  <None Remove="Data\2024\Test\23.txt" />
 	  <None Remove="Data\2024\Test\24.txt" />
 	  <None Remove="Data\2024\Test\25.txt" />
