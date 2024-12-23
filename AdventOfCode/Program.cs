@@ -44,4 +44,5 @@ using Year2024 = AdventOfCode.Solvers.Year2024;
 //new Year2024.Day19Solver(6, 16).Solve();
 //new Year2024.Day20Solver(10, 285).Solve();
 //new Year2024.Day21Solver(126384, 154115708116294).Solve();
-new Year2024.Day22Solver(37327623, 23).Solve();
+//new Year2024.Day22Solver(37327623, 23).Solve();
+new Year2024.Day23Solver("7", "co,de,ka,ta").Solve();
