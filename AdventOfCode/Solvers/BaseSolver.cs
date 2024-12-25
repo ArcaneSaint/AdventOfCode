@@ -4,7 +4,7 @@ using AdventOfCode.Interfaces;
 
 namespace AdventOfCode.Solvers;
 
-public abstract class BaseSolver<T>(int day, int year, T part1Test, T part2Test) : ISolver<T>
+public abstract class BaseSolver<T1,T2>(int day, int year, T1 part1Test, T2 part2Test) : ISolver<T1,T2>
 {
     public virtual string? AdditionalInfo { get; protected set; }
 
@@ -24,7 +24,7 @@ public abstract class BaseSolver<T>(int day, int year, T part1Test, T part2Test)
         Console.WriteLine();
     }
 
-    private void TestPart(string[] testInput, string[] input, int part, T expectedTest, Func<string[], T> action)
+    private void TestPart<T>(string[] testInput, string[] input, int part, T expectedTest, Func<string[], T> action)
     {
         Console.WriteLine($"Part {part}");
 
@@ -35,7 +35,7 @@ public abstract class BaseSolver<T>(int day, int year, T part1Test, T part2Test)
         Display(totalTime, result, "Result", ConsoleColor.Blue);
     }
 
-    private void Display(TimeSpan totalTime, T result, string label, ConsoleColor resultColor)
+    private void Display<T>(TimeSpan totalTime, T result, string label, ConsoleColor resultColor)
     {
         Console.Write($"  {label}: ");
         using (new ColorOutputter(resultColor))
@@ -51,7 +51,7 @@ public abstract class BaseSolver<T>(int day, int year, T part1Test, T part2Test)
         }
         Console.WriteLine($"   Total time elapsed: {totalTime}");
     }
-    private static (TimeSpan TotalTime, T Result) Measure(Func<string[], T> action, string[] input)
+    private static (TimeSpan TotalTime, T Result) Measure<T>(Func<string[], T> action, string[] input)
     {
         Stopwatch watch = Stopwatch.StartNew();
         var result = action(input);
@@ -59,7 +59,7 @@ public abstract class BaseSolver<T>(int day, int year, T part1Test, T part2Test)
         return (watch.Elapsed, result);
     }
 
-    public abstract T Part1(string[] input);
+    public abstract T1 Part1(string[] input);
 
-    public abstract T Part2(string[] input);
+    public abstract T2 Part2(string[] input);
 }
