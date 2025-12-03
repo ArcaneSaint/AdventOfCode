@@ -6,6 +6,7 @@ using AdventOfCode.Solvers.Year2015;
 // See https://aka.ms/new-console-template for more information
 using Year2015 = AdventOfCode.Solvers.Year2015;
 using Year2024 = AdventOfCode.Solvers.Year2024;
+using Year2025 = AdventOfCode.Solvers.Year2025;
 
 
 
@@ -17,7 +18,13 @@ using Year2024 = AdventOfCode.Solvers.Year2024;
 //new Year2015.Day5Solver(2, 2).Solve();
 //new Year2015.Day6Solver(1000000 - 1000 - 4, 1000000 + 2000 - 4).Solve();
 //new Year2015.Day7Solver(65079, 456).Solve();
-//new Year2015.Day8Solver(12, 456).Solve();
+//new Year2015.Day8Solver(12, 19).Solve();
+//new Year2015.Day9Solver(605, 982).Solve();
+//new Year2015.Day10Solver(6, 0).Solve();
+//new Year2015.Day11Solver("abcdffaa", "abcdffbb").Solve();
+//new Year2015.Day12Solver(18, 0).Solve();
+
+
 
 
 
@@ -47,4 +54,9 @@ using Year2024 = AdventOfCode.Solvers.Year2024;
 //new Year2024.Day22Solver(37327623, 23).Solve();
 //new Year2024.Day23Solver("7", "co,de,ka,ta").Solve();
 //new Year2024.Day24Solver(2024, "z00,z01,z02,z05").Solve();
-new Year2024.Day25Solver(3, 3).Solve();
+//new Year2024.Day25Solver(3, 3).Solve();
+
+
+//new Year2025.Day1Solver(3, 6).Solve();
+//new Year2025.Day2Solver(1227775554, 4174379265).Solve();
+new Year2025.Day3Solver(357, 3121910778619).Solve();
