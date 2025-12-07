@@ -10,7 +10,7 @@ internal class Day2Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
     public override long Part1(string[] input)
     {
         // language=regex
-        patternToUse = "/^(.*)(\\1)$/";
+        patternToUse = "^(.*)(\\1)$";
         var ranges = input[0].Split(',');
         var total = 0l;
         foreach (var range in ranges)
@@ -44,7 +44,7 @@ internal class Day2Solver(long part1Test = 0, long part2Test = 0) : BaseSolver20
     public override long Part2(string[] input)
     {
         // language=regex
-        patternToUse = "/^(.*)(\\1)+$/";
+        patternToUse = "^(.*)(\\1)+$";
         var ranges = input[0].Split(',');
         var total = 0l;
         foreach (var range in ranges)
