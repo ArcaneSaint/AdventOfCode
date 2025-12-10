@@ -65,4 +65,5 @@ using Year2025 = AdventOfCode.Solvers.Year2025;
 //new Year2025.Day6Solver(4277556, 3263827).Solve();
 //new Year2025.Day7Solver(21, 40).Solve();
 //new Year2025.Day8Solver(40, 25272).Solve();
-new Year2025.Day9Solver(50, 24).Solve();
+//new Year2025.Day9Solver(50, 24).Solve();
+new Year2025.Day10Solver(7, 33).Solve();
